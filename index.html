@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>My Ledger</title>
+
+<!-- iOS "Add to Home Screen" app behaviour -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ledger">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1E2B22">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAACSElEQVR4nO2Vz08TURDH5zvv7bJsk1YEEySGQMPNv0EEjRpJvGkiB/8VNUGjnEy88D/o0X/A6NU04aZoohBOtMgC/QEtb8ZDrdSl3W5sezBhjrvvzWfmzcx3MH01T8M0Hqr3c0Aasz34zABiH0VEVQcD2D84EBHmVqKqTiQThr7vp2QkAQDcW7qbCcNqrQYiVTLGZDLhp0Lhx+ZWSkZnAEAiaox5tPxwLp+/PDkJwLDZKe7Ujo5XVle/fP0WBIFzricACYMGoFyp5Gdn3r19A2Asd+H12trjZ88vTUykr0GPLrLWetYaZsPMzMYYz/NOS9I/oH87B/z/gI5aMkjAYblcr9cTGD0AxhhjzOlpwFrTbq9evliYv1auVLoNRw+x24uivb1IRACoaqVa3S2WnBPnnIoS6ObiwueNjYQkumqRKjHz8oP7c/nZbDbLgIW3eH1+5emTcHRURIhIRMZyuUajwej6EnGAEyHVJsA5t3Tn9pWpqfcfPgJQlSAIbt1YbMZORM65wvr61vY2MzvnnHMEMmzaHf4ldgDC0RAAgdyJGx+/ODM93Tg5sa0yiKiI0J/HUPV9//vm5u7uT2MNKSlptVptl8J4BiMjPsBEJFZU9bBcFtFuLaKkR8fHRBQEQbPIqlqr1ZIA9XqjVS1E0X6xVAIltbmSerapr0pEqhRT8jigfXCY2fO8BO+/GW0ez+6JOAAMBpQSw45dAYioeeXsHooDRFot8o+WmIGqRlHUh3ciovbJjwOavwcZf8dJTrvO09nQ98EvBif8MrbUcNIAAAAASUVORK5CYII=">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper: #EEF2E7; --paper-card: #F6F8F1; --paper-alt: #E4EADB; --rule: #DCE3D2; --rule-strong: #C3CDB8;
+    --ink: #1E2B22; --ink-soft: #5C6B5F; --ink-faint: #8C9A85;
+    --credit: #2E7D4F; --debit: #A83E2C; --invest: #3D4F8C; --petrol-bg: #F2E4CE; --petrol-fg: #8A5A1E;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; background: var(--paper); }
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    background-image: repeating-linear-gradient(var(--paper) 0 27px, var(--rule) 27px 28px);
+    padding: max(24px, env(safe-area-inset-top)) 16px calc(50px + env(safe-area-inset-bottom));
+    min-height: 100vh;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; animation: fadeIn 0.4s ease both; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes rowIn { from { opacity: 0; } to { opacity: 1; } }
+  .icon { width: 1em; height: 1em; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: -0.15em; }
+
+  .header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .header-icon { width: 38px; height: 38px; border-radius: 8px; background: var(--ink); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--paper); font-size: 18px; }
+  h1.title { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 700; margin: 0; letter-spacing: -0.02em; }
+  p.subtitle { font-size: 12.5px; color: var(--ink-soft); margin: 2px 0 0; }
+
+  .balance-card { background: var(--paper-card); border: 1px solid var(--rule-strong); border-radius: 10px; margin-bottom: 16px; box-shadow: 0 1px 0 #fff inset, 0 6px 16px -10px rgba(30,43,34,0.35); overflow: hidden; }
+  .perforation { display: flex; justify-content: space-between; padding: 0 12px; background: var(--paper); height: 10px; align-items: center; }
+  .perforation span { width: 5px; height: 5px; border-radius: 50%; background: var(--rule-strong); }
+  .balance-inner { padding: 18px 22px 20px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px; }
+  .balance-label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); margin-bottom: 4px; }
+  .balance-amount { font-family: 'Fraunces', serif; font-size: 38px; font-weight: 600; line-height: 1; }
+  .starting-box { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; }
+  .starting-btn { background: transparent; border: 1px dashed var(--rule-strong); border-radius: 6px; padding: 5px 9px; font-size: 11.5px; color: var(--ink-soft); cursor: pointer; display: inline-flex; align-items: center; gap: 5px; font-family: 'IBM Plex Mono', monospace; }
+  .starting-edit-row { display: flex; align-items: center; gap: 6px; }
+  .starting-input { width: 90px; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; border: 1px solid var(--rule-strong); border-radius: 5px; padding: 3px 6px; background: #fff; }
+  .icon-btn-ghost { border: none; background: transparent; cursor: pointer; padding: 3px; display: flex; }
+
+  .summary-row { display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
+  .pill { flex: 1 1 200px; background: var(--paper-card); border: 1px solid; border-radius: 9px; padding: 10px 12px; display: flex; align-items: center; gap: 9px; }
+  .pill-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .pill-label { font-size: 10.5px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.05em; }
+  .pill-value { font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600; margin-top: 2px; }
+
+  .add-section { margin-bottom: 20px; }
+  .add-btn { width: 100%; background: var(--ink); color: var(--paper); border: none; border-radius: 9px; padding: 12px 16px; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 7px; transition: filter 0.15s ease, transform 0.1s ease; }
+  .add-btn:active { transform: scale(0.98); }
+  .add-form { background: var(--paper-card); border: 1px solid var(--rule-strong); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+  .toggle-group { display: flex; gap: 8px; }
+  .toggle-btn { flex: 1; padding: 8px 10px; border-radius: 7px; border: 1px solid var(--rule-strong); background: #fff; font-size: 13px; font-weight: 600; color: var(--ink-soft); cursor: pointer; }
+  .toggle-btn.active-debit { background: var(--debit); border-color: var(--debit); color: #fff; }
+  .toggle-btn.active-credit { background: var(--credit); border-color: var(--credit); color: #fff; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .field-label { display: flex; flex-direction: column; gap: 5px; font-size: 11.5px; color: var(--ink-soft); font-weight: 600; }
+  .field-input, .field-select, .field-textarea { border: 1px solid var(--rule-strong); border-radius: 7px; padding: 8px 10px; font-size: 13.5px; font-family: 'Inter', sans-serif; background: #fff; color: var(--ink); width: 100%; }
+  .field-input:focus, .field-select:focus, .field-textarea:focus { outline: none; border-color: var(--invest); }
+  .field-textarea { resize: vertical; }
+  .form-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 2px; }
+  .btn-cancel { padding: 9px 16px; border-radius: 7px; border: 1px solid var(--rule-strong); background: #fff; font-size: 13px; font-weight: 600; color: var(--ink-soft); cursor: pointer; }
+  .btn-save { padding: 9px 18px; border-radius: 7px; border: none; background: var(--ink); color: var(--paper); font-size: 13px; font-weight: 600; cursor: pointer; }
+  .btn-save:disabled { opacity: 0.5; }
+
+  .entries-header { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); margin-bottom: 8px; padding-left: 2px; }
+  .entries-count { background: var(--rule); border-radius: 20px; padding: 1px 8px; font-size: 11px; font-family: 'IBM Plex Mono', monospace; }
+  .empty-state { background: var(--paper-card); border: 1px dashed var(--rule-strong); border-radius: 10px; padding: 26px 20px; text-align: center; color: var(--ink-soft); font-size: 13.5px; line-height: 1.5; }
+
+  .columns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; align-items: start; }
+  @media (max-width: 720px) { .columns { grid-template-columns: 1fr; } }
+  .column-card { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .column-header { display: flex; align-items: center; justify-content: space-between; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); padding: 0 2px; }
+  .column-empty { background: var(--paper-card); border: 1px dashed var(--rule-strong); border-radius: 8px; padding: 16px 10px; text-align: center; color: var(--ink-faint); font-size: 11.5px; }
+
+  .list { display: flex; flex-direction: column; gap: 6px; }
+  .row-wrap { background: var(--paper-card); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; animation: rowIn 0.25s ease both; }
+  .row { display: flex; flex-direction: column; gap: 4px; padding: 9px 10px; cursor: pointer; font-size: 12.5px; }
+  .row:hover { background: var(--paper-alt); }
+  .row-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .row-bottom { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+  .row-date { font-family: 'IBM Plex Mono', monospace; color: var(--ink-soft); font-size: 11px; }
+  .row-note-hint { color: var(--ink-soft); font-size: 11.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .row-amount { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 12.5px; text-align: right; }
+  .row-balance { font-family: 'IBM Plex Mono', monospace; color: var(--ink-faint); font-size: 11px; }
+  .row-chevron { transition: transform 0.2s ease; flex-shrink: 0; color: var(--ink-faint); }
+  .row-chevron.open { transform: rotate(180deg); }
+
+  .chip { font-size: 10.5px; font-weight: 600; padding: 3px 8px; border-radius: 20px; text-align: center; width: fit-content; }
+  .chip-default { background: var(--rule); color: #4A5A44; }
+  .chip-invest { background: #DCE1F0; color: var(--invest); }
+  .chip-petrol { background: var(--petrol-bg); color: var(--petrol-fg); }
+
+  .expand-panel { border-top: 1px solid var(--rule); padding: 10px 12px 12px; display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; flex-wrap: wrap; animation: fadeIn 0.25s ease both; }
+  .expand-note { font-size: 12.5px; color: #3A473C; line-height: 1.5; flex: 1; }
+  .expand-actions { display: flex; gap: 6px; flex-shrink: 0; }
+  .small-action-btn { display: flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; padding: 5px 9px; border-radius: 6px; border: 1px solid var(--rule-strong); background: #fff; color: var(--ink-soft); cursor: pointer; }
+  .small-action-btn.danger { color: var(--debit); border-color: #E3B9AC; }
+
+  .edit-card { padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+  .edit-grid { display: flex; flex-direction: column; gap: 8px; }
+
+  .footer { margin-top: 28px; text-align: center; font-size: 11.5px; color: var(--ink-faint); }
+  .link-btn { background: none; border: none; text-decoration: underline; cursor: pointer; font-size: 11.5px; color: var(--ink-faint); }
+  .link-btn.confirm { color: var(--debit); font-weight: 700; }
+  .link-btn.cancel { color: var(--ink-soft); }
+
+  .install-tip { background: var(--paper-card); border: 1px solid var(--rule-strong); border-radius: 9px; padding: 12px 14px; font-size: 12px; color: var(--ink-soft); margin-bottom: 18px; line-height: 1.5; display: none; }
+  .install-tip.show { display: block; }
+  .install-tip b { color: var(--ink); }
+  .install-tip button { float: right; background: none; border: none; color: var(--ink-faint); cursor: pointer; font-size: 11px; text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  var STORAGE_KEY = "my-ledger-data-v1";
+  var TIP_DISMISS_KEY = "my-ledger-tip-dismissed";
+  var CATEGORIES = ["Salary", "SIP", "Stocks", "Petrol", "Food", "Bills", "Shopping", "Transfer", "Other"];
+
+  var ICONS = {
+    plus: '<svg class="icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
+    chevron: '<svg class="icon row-chevron {cls}" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>',
+    pencil: '<svg class="icon" viewBox="0 0 24 24"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>',
+    trash: '<svg class="icon" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>',
+    check: '<svg class="icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>',
+    x: '<svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
+    book: '<svg class="icon" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>'
+  };
+
+  // ---------- persisted state ----------
+  var state = { startingBalance: 0, transactions: [] };
+
+  // ---------- transient UI state ----------
+  var ui = {
+    showAdd: false,
+    expandedId: null,
+    editingId: null,
+    editingBalance: false,
+    confirmReset: false,
+    saveError: false
+  };
+  var addDraft = emptyDraft();
+  var editDraft = null;
+  var balanceDraft = "0";
+
+  function emptyDraft() {
+    return { type: "debit", amount: "", category: "Other", date: todayISO(), note: "" };
+  }
+
+  function todayISO() {
+    var d = new Date();
+    var tz = d.getTimezoneOffset() * 60000;
+    return new Date(d - tz).toISOString().slice(0, 10);
+  }
+
+  function fmt(n) {
+    return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 2 }).format(Math.abs(n));
+  }
+
+  function fmtDate(iso) {
+    var d = new Date(iso + "T00:00:00");
+    return d.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+  }
+
+  function monthKey(iso) { return iso.slice(0, 7); }
+
+  function columnFor(category) {
+    if (category === "SIP") return "sips";
+    if (category === "Petrol") return "petrol";
+    return "regular";
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  // ---------- persistence ----------
+  function load() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        var parsed = JSON.parse(raw);
+        state.startingBalance = parsed.startingBalance || 0;
+        state.transactions = parsed.transactions || [];
+        balanceDraft = String(state.startingBalance);
+      }
+    } catch (e) { /* fresh start */ }
+  }
+
+  function save() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      ui.saveError = false;
+    } catch (e) {
+      ui.saveError = true;
+    }
+  }
+
+  // ---------- derived data ----------
+  function computeDerived() {
+    var chrono = state.transactions.slice().sort(function (a, b) {
+      if (a.date !== b.date) return a.date < b.date ? -1 : 1;
+      return a.id - b.id;
+    });
+    var bal = state.startingBalance;
+    var balMap = {};
+    for (var i = 0; i < chrono.length; i++) {
+      var t = chrono[i];
+      bal += t.type === "credit" ? t.amount : -t.amount;
+      balMap[t.id] = bal;
+    }
+    var currentBalance = chrono.length ? balMap[chrono[chrono.length - 1].id] : state.startingBalance;
+
+    var displayList = state.transactions.slice().sort(function (a, b) {
+      if (a.date !== b.date) return a.date > b.date ? -1 : 1;
+      return b.id - a.id;
+    });
+
+    var groups = { regular: [], sips: [], petrol: [] };
+    for (var j = 0; j < displayList.length; j++) {
+      groups[columnFor(displayList[j].category)].push(displayList[j]);
+    }
+
+    var mk = monthKey(todayISO());
+    var credited = 0, debited = 0;
+    for (var k = 0; k < state.transactions.length; k++) {
+      var tt = state.transactions[k];
+      if (monthKey(tt.date) !== mk) continue;
+      if (tt.type === "credit") credited += tt.amount; else debited += tt.amount;
+    }
+
+    return { balMap: balMap, currentBalance: currentBalance, groups: groups, credited: credited, debited: debited };
+  }
+
+  // ---------- actions ----------
+  function handleAdd() {
+    var amt = parseFloat(addDraft.amount);
+    if (!amt || amt <= 0 || !addDraft.date) return;
+    state.transactions.push({
+      id: Date.now() + Math.random(),
+      type: addDraft.type,
+      amount: amt,
+      category: addDraft.category,
+      date: addDraft.date,
+      note: (addDraft.note || "").trim()
+    });
+    save();
+    addDraft = emptyDraft();
+    ui.showAdd = false;
+    render();
+  }
+
+  function startEdit(t) {
+    ui.editingId = t.id;
+    editDraft = { type: t.type, amount: String(t.amount), category: t.category, date: t.date, note: t.note || "" };
+    ui.expandedId = t.id;
+    render();
+  }
+
+  function saveEdit() {
+    var amt = parseFloat(editDraft.amount);
+    if (!amt || amt <= 0 || !editDraft.date) return;
+    state.transactions = state.transactions.map(function (t) {
+      if (t.id !== ui.editingId) return t;
+      return { id: t.id, type: editDraft.type, amount: amt, category: editDraft.category, date: editDraft.date, note: editDraft.note.trim() };
+    });
+    save();
+    ui.editingId = null;
+    editDraft = null;
+    render();
+  }
+
+  function deleteTx(id) {
+    state.transactions = state.transactions.filter(function (t) { return t.id !== id; });
+    save();
+    if (ui.expandedId === id) ui.expandedId = null;
+    if (ui.editingId === id) { ui.editingId = null; editDraft = null; }
+    render();
+  }
+
+  function saveStartingBalance() {
+    var v = parseFloat(balanceDraft);
+    state.startingBalance = isNaN(v) ? 0 : v;
+    save();
+    ui.editingBalance = false;
+    render();
+  }
+
+  function doReset() {
+    state.transactions = [];
+    state.startingBalance = 0;
+    balanceDraft = "0";
+    save();
+    ui.confirmReset = false;
+    render();
+  }
+
+  // ---------- render ----------
+  function chipClass(category) {
+    if (category === "SIP") return "chip-invest";
+    if (category === "Petrol") return "chip-petrol";
+    return "chip-default";
+  }
+
+  function renderRow(t, balMap) {
+    var isExpanded = ui.expandedId === t.id;
+    var isEditing = ui.editingId === t.id;
+    var bal = balMap[t.id];
+
+    if (isEditing) {
+      var catOptions = CATEGORIES.map(function (c) {
+        return '<option value="' + c + '"' + (editDraft.category === c ? " selected" : "") + '>' + c + "</option>";
+      }).join("");
+      return (
+        '<div class="row-wrap" data-id="' + t.id + '">' +
+          '<div class="edit-card">' +
+            '<div class="toggle-group">' +
+              '<button type="button" class="toggle-btn' + (editDraft.type === "debit" ? " active-debit" : "") + '" data-action="edit-type" data-value="debit">Debit</button>' +
+              '<button type="button" class="toggle-btn' + (editDraft.type === "credit" ? " active-credit" : "") + '" data-action="edit-type" data-value="credit">Credit</button>' +
+            '</div>' +
+            '<div class="edit-grid">' +
+              '<label class="field-label">Amount (\u20B9)<input class="field-input" type="number" min="0" step="0.01" data-form="edit" data-field="amount" value="' + escapeHtml(editDraft.amount) + '"></label>' +
+              '<label class="field-label">Category<select class="field-select" data-form="edit" data-field="category">' + catOptions + '</select></label>' +
+              '<label class="field-label">Date<input class="field-input" type="date" data-form="edit" data-field="date" value="' + escapeHtml(editDraft.date) + '"></label>' +
+            '</div>' +
+            '<label class="field-label">Note to self<textarea class="field-textarea" rows="2" data-form="edit" data-field="note">' + escapeHtml(editDraft.note) + '</textarea></label>' +
+            '<div class="form-actions">' +
+              '<button type="button" class="btn-cancel" data-action="edit-cancel">Cancel</button>' +
+              '<button type="button" class="btn-save" data-action="edit-save">Save changes</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>'
+      );
+    }
+
+    var noteHint = t.note ? '<div class="row-note-hint">' + escapeHtml(t.note.length > 34 ? t.note.slice(0, 34) + "\u2026" : t.note) + '</div>' : "";
+    var expandPanel = "";
+    if (isExpanded) {
+      expandPanel =
+        '<div class="expand-panel">' +
+          '<div class="expand-note">' + (t.note ? escapeHtml(t.note) : '<span style="color:var(--ink-faint)">No note added.</span>') + '</div>' +
+          '<div class="expand-actions">' +
+            '<button type="button" class="small-action-btn" data-action="edit-start" data-id="' + t.id + '">' + ICONS.pencil + ' Edit</button>' +
+            '<button type="button" class="small-action-btn danger" data-action="delete" data-id="' + t.id + '">' + ICONS.trash + ' Delete</button>' +
+          '</div>' +
+        '</div>';
+    }
+
+    return (
+      '<div class="row-wrap" data-id="' + t.id + '">' +
+        '<div class="row" data-action="toggle-expand" data-id="' + t.id + '">' +
+          '<div class="row-top">' +
+            '<span class="chip ' + chipClass(t.category) + '">' + escapeHtml(t.category) + '</span>' +
+            '<span class="row-amount" style="color:' + (t.type === "credit" ? "var(--credit)" : "var(--debit)") + '">' + (t.type === "credit" ? "+" : "\u2212") + ' ' + fmt(t.amount) + '</span>' +
+          '</div>' +
+          noteHint +
+          '<div class="row-bottom">' +
+            '<span class="row-date">' + fmtDate(t.date) + '</span>' +
+            '<span class="row-balance">Bal ' + fmt(bal) + '</span>' +
+            ICONS.chevron.replace("{cls}", isExpanded ? "open" : "") +
+          '</div>' +
+        '</div>' +
+        expandPanel +
+      '</div>'
+    );
+  }
+
+  function renderColumn(title, list, balMap) {
+    var body = list.length
+      ? '<div class="list">' + list.map(function (t) { return renderRow(t, balMap); }).join("") + '</div>'
+      : '<div class="column-empty">No entries yet.</div>';
+    return (
+      '<div class="column-card">' +
+        '<div class="column-header"><span>' + title + '</span><span class="entries-count">' + list.length + '</span></div>' +
+        body +
+      '</div>'
+    );
+  }
+
+  function render() {
+    var d = computeDerived();
+    var catOptionsAdd = CATEGORIES.map(function (c) {
+      return '<option value="' + c + '"' + (addDraft.category === c ? " selected" : "") + '>' + c + "</option>";
+    }).join("");
+
+    var tipDismissed = localStorage.getItem(TIP_DISMISS_KEY) === "1";
+    var isStandalone = window.navigator.standalone === true;
+    var installTip = (!isStandalone && !tipDismissed)
+      ? '<div class="install-tip show" id="install-tip"><button data-action="dismiss-tip">Dismiss</button><b>Add this to your Home Screen:</b> tap the Share icon in Safari, then "Add to Home Screen". It\'ll open full-screen like a regular app, and your data stays saved on this device.</div>'
+      : '';
+
+    var html =
+      installTip +
+      '<div class="header">' +
+        '<div class="header-icon">' + ICONS.book + '</div>' +
+        '<div><h1 class="title">My Ledger</h1><p class="subtitle">a running record, kept for yourself</p></div>' +
+      '</div>' +
+
+      '<div class="balance-card">' +
+        '<div class="perforation">' + Array(26).fill("<span></span>").join("") + '</div>' +
+        '<div class="balance-inner">' +
+          '<div>' +
+            '<div class="balance-label">Current balance</div>' +
+            '<div class="balance-amount" style="color:' + (d.currentBalance < 0 ? "var(--debit)" : "var(--ink)") + '">' + (d.currentBalance < 0 ? "-" : "") + fmt(d.currentBalance) + '</div>' +
+          '</div>' +
+          '<div class="starting-box">' +
+            (ui.editingBalance
+              ? '<div class="starting-edit-row"><span style="font-size:11.5px;color:var(--ink-soft)">Opening balance \u20B9</span>' +
+                '<input class="starting-input" type="number" data-form="balance" data-field="value" value="' + escapeHtml(balanceDraft) + '">' +
+                '<button type="button" class="icon-btn-ghost" data-action="balance-save" style="color:var(--credit)">' + ICONS.check + '</button>' +
+                '<button type="button" class="icon-btn-ghost" data-action="balance-cancel" style="color:var(--ink-soft)">' + ICONS.x + '</button></div>'
+              : '<button type="button" class="starting-btn" data-action="balance-edit">Opening balance ' + fmt(state.startingBalance) + ' ' + ICONS.pencil + '</button>')
+          +'</div>' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="summary-row">' +
+        '<div class="pill" style="border-color:var(--credit)"><div class="pill-dot" style="background:var(--credit)"></div><div><div class="pill-label">Credited this month</div><div class="pill-value" style="color:var(--credit)">' + fmt(d.credited) + '</div></div></div>' +
+        '<div class="pill" style="border-color:var(--debit)"><div class="pill-dot" style="background:var(--debit)"></div><div><div class="pill-label">Debited this month</div><div class="pill-value" style="color:var(--debit)">' + fmt(d.debited) + '</div></div></div>' +
+      '</div>' +
+
+      '<div class="add-section">' +
+        (!ui.showAdd
+          ? '<button type="button" class="add-btn" data-action="add-open">' + ICONS.plus + ' Add entry</button>'
+          : '<div class="add-form">' +
+              '<div class="toggle-group">' +
+                '<button type="button" class="toggle-btn' + (addDraft.type === "debit" ? " active-debit" : "") + '" data-action="add-type" data-value="debit">Debit</button>' +
+                '<button type="button" class="toggle-btn' + (addDraft.type === "credit" ? " active-credit" : "") + '" data-action="add-type" data-value="credit">Credit</button>' +
+              '</div>' +
+              '<div class="form-grid">' +
+                '<label class="field-label">Amount (\u20B9)<input class="field-input" type="number" min="0" step="0.01" placeholder="0.00" data-form="add" data-field="amount" value="' + escapeHtml(addDraft.amount) + '"></label>' +
+                '<label class="field-label">Category<select class="field-select" data-form="add" data-field="category">' + catOptionsAdd + '</select></label>' +
+                '<label class="field-label">Date<input class="field-input" type="date" data-form="add" data-field="date" value="' + escapeHtml(addDraft.date) + '"></label>' +
+              '</div>' +
+              '<label class="field-label">Note to self (optional)<textarea class="field-textarea" rows="2" placeholder="e.g. monthly SIP \u2014 Parag Parikh Flexi Cap" data-form="add" data-field="note">' + escapeHtml(addDraft.note) + '</textarea></label>' +
+              '<div class="form-actions">' +
+                '<button type="button" class="btn-cancel" data-action="add-cancel">Cancel</button>' +
+                '<button type="button" class="btn-save" data-action="add-save"' + (!addDraft.amount || parseFloat(addDraft.amount) <= 0 ? " disabled" : "") + '>Add to ledger</button>' +
+              '</div>' +
+            '</div>')
+      + '</div>' +
+
+      '<div class="entries-header"><span>Entries</span><span class="entries-count">' + state.transactions.length + '</span></div>' +
+      (state.transactions.length === 0
+        ? '<div class="empty-state">Nothing recorded yet. Add your first entry above \u2014 every debit, credit, SIP, and petrol fill-up starts here.</div>'
+        : '<div class="columns">' + renderColumn("Regular", d.groups.regular, d.balMap) + renderColumn("SIPs", d.groups.sips, d.balMap) + renderColumn("Petrol", d.groups.petrol, d.balMap) + '</div>') +
+
+      '<div class="footer">' +
+        (ui.saveError ? '<span style="color:var(--debit)">Couldn\'t save \u2014 your last change may not persist. </span>' : '') +
+        (!ui.confirmReset
+          ? '<button type="button" class="link-btn" data-action="reset-ask">Clear all data</button>'
+          : '<span>This deletes every entry, permanently. <button type="button" class="link-btn confirm" data-action="reset-yes">Yes, clear it</button> <button type="button" class="link-btn cancel" data-action="reset-cancel">Cancel</button></span>')
+      + '</div>';
+
+    document.getElementById("app").innerHTML = html;
+  }
+
+  // ---------- event delegation ----------
+  document.addEventListener("click", function (e) {
+    var el = e.target.closest("[data-action]");
+    if (!el) return;
+    var action = el.dataset.action;
+
+    if (action === "add-open") { ui.showAdd = true; render(); return; }
+    if (action === "add-cancel") { ui.showAdd = false; addDraft = emptyDraft(); render(); return; }
+    if (action === "add-save") { handleAdd(); return; }
+    if (action === "add-type") { addDraft.type = el.dataset.value; render(); return; }
+
+    if (action === "edit-type") { editDraft.type = el.dataset.value; render(); return; }
+    if (action === "edit-cancel") { ui.editingId = null; editDraft = null; render(); return; }
+    if (action === "edit-save") { saveEdit(); return; }
+    if (action === "edit-start") {
+      var idNum = parseFloat(el.dataset.id);
+      var found = state.transactions.find(function (t) { return t.id === idNum; });
+      if (found) startEdit(found);
+      return;
+    }
+    if (action === "delete") { deleteTx(parseFloat(el.dataset.id)); return; }
+
+    if (action === "toggle-expand") {
+      var tid = parseFloat(el.dataset.id);
+      ui.expandedId = ui.expandedId === tid ? null : tid;
+      render();
+      return;
+    }
+
+    if (action === "balance-edit") { ui.editingBalance = true; render(); return; }
+    if (action === "balance-save") { saveStartingBalance(); return; }
+    if (action === "balance-cancel") { ui.editingBalance = false; balanceDraft = String(state.startingBalance); render(); return; }
+
+    if (action === "reset-ask") { ui.confirmReset = true; render(); return; }
+    if (action === "reset-yes") { doReset(); return; }
+    if (action === "reset-cancel") { ui.confirmReset = false; render(); return; }
+
+    if (action === "dismiss-tip") { localStorage.setItem(TIP_DISMISS_KEY, "1"); render(); return; }
+  });
+
+  // sync form fields into drafts WITHOUT re-rendering, to avoid losing cursor position while typing
+  document.addEventListener("input", function (e) {
+    var el = e.target;
+    var form = el.dataset.form, field = el.dataset.field;
+    if (!form || !field) return;
+    if (form === "add") addDraft[field] = el.value;
+    else if (form === "edit" && editDraft) editDraft[field] = el.value;
+    else if (form === "balance") balanceDraft = el.value;
+
+    // keep the Add button's enabled state in sync without a full re-render
+    if (form === "add" && field === "amount") {
+      var btn = document.querySelector('[data-action="add-save"]');
+      if (btn) btn.disabled = !(el.value && parseFloat(el.value) > 0);
+    }
+  });
+
+  // ---------- init ----------
+  load();
+  render();
+})();
+</script>
+</body>
+</html>
